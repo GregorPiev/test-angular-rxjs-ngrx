@@ -1,0 +1,45 @@
+<div id="wrapper-list">
+  <div class="wrapper-header">
+    <button class="add-button" (click)="addElemet()">+Add</button>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="search products">
+
+    <div class="wrapper-select">
+      <label>Sort by</label>&nbsp;
+      <select (change)="orderData($event, 'desc')">
+        <option>Choose Sort</option>
+        <option *ngFor="let item of sortList" [value]="item.value">{{item.value}}</option>
+      </select>
+    </div>
+  </div>
+
+  
+
+  <div class="wrapper-table">
+    <mat-table [dataSource]="prodList" matSort *ngIf="prodList!==null">
+
+      <ng-container matColumnDef="Name">
+
+        <mat-cell *matCellDef="let row">
+          <div class="wrapper-item">
+            <img class="image" src="../../../assets/img/placeholder.png" alt="" />
+
+            <div class="item-content">
+              <h3>{{row.Name}}</h3>
+              <p title="{{row.Description}}">{{row.Description}}</p>
+              <p>Creation Date: {{row.CreationDate}}</p>
+              <p>Price:{{row.Price}}</p>
+            </div>
+            <div class="button">
+              <button (click)="deleteHandler($event, row)">Delete</button>
+
+            </div>
+          </div>
+
+        </mat-cell>
+      </ng-container>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="editElement(row)"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[4, 8, 12]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

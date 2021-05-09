@@ -1,0 +1,36 @@
+<div id="product-edit">  
+  <fieldset>
+    <legend>{{currentProduct}} Details</legend>
+    <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+      <img src="../../../assets/img/placeholder.png" alt="" />
+      <div class="mb-3">
+        <label for="name" class="form-label">Name<span class="must">*</span></label>
+        <input type="email" formControlName="Name" placeholder="product name" maxlength="30" class="form-control" aria-describedby="Name">
+        <div class="must" *ngIf="myForm.get('Name').hasError('required') && myForm.get('Name').touched">Mandatory field</div>
+        <div class="must" *ngIf="myForm.get('Name').hasError('minlength') && myForm.get('Name').touched">Have to be at least 6 charachters</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Description<span class="must">*</span></label>
+        <textarea class="form-control" maxlength="200" formControlName="Description" placeholder="Product description" aria-describedby="Description"></textarea>
+        <div class="must" *ngIf="myForm.get('Description').hasError('required') && myForm.get('Description').touched">Mandatory field</div>
+        <div class="must" *ngIf="myForm.get('Description').hasError('minlength') && myForm.get('Description').touched">Have to be at least 20 charachters</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Price<span class="must">*</span></label><br />
+        <input type="number" formControlName="Price" placeholder="Price" class="form-control-sm  input-sm" aria-describedby="Price">
+        <div class="must" *ngIf="myForm.get('Price').hasError('required') && myForm.get('Price').touched">Mandatory field</div>
+        <div id="emailHelp" class="form-text"></div>
+      </div>
+
+      <p class="text-right">
+        <button type="submit" class="btn btn-sm btn-custom" [disabled]="myForm.invalid">Save</button>
+      </p>
+      
+     
+    </form>
+  </fieldset>
+  
+    
+</div>
